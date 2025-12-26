@@ -317,3 +317,11 @@ learning rate 0.0001000 -> 0.0001000
 End of epoch 28 / 400 	 Time Taken: 158 sec
 (epoch: 29, iters: 100, time: 1.095, data: 0.192) cycle_A: 5.431 D_B: 0.235 G_B: 0.534 cycle_B: 2.643 G: 8.608 
 (epoch: 29, iters: 200, time: 1.515, data: 0.000) cycle_A: 7.243 D_B: 0.215 G_B: 0.559 cycle_B: 8.773 G: 16.576 
+(epoch: 29, iters: 300, time: 1.119, data: 0.000) cycle_A: 4.733 D_B: 0.213 G_B: 0.303 cycle_B: 0.760 G: 5.796 
+(epoch: 29, iters: 400, time: 1.092, data: 0.000) cycle_A: 4.146 D_B: 0.192 G_B: 0.487 cycle_B: 1.807 G: 6.440 
+(epoch: 29, iters: 500, time: 1.093, data: 0.000) cycle_A: 5.540 D_B: 0.213 G_B: 0.260 cycle_B: 2.991 G: 8.792 
+(epoch: 29, iters: 600, time: 1.090, data: 0.000) cycle_A: 4.279 D_B: 0.245 G_B: 0.295 cycle_B: 0.626 G: 5.200 
+learning rate 0.0001000 -> 0.0001000
+End of epoch 29 / 400 	 Time Taken: 157 sec
+(epoch: 30, iters: 100, time: 1.119, data: 0.217) cycle_A: 3.347 D_B: 0.186 G_B: 0.356 cycle_B: 0.630 G: 4.333 
+(epoch: 30, iters: 200, time: 1.553, data: 0.000) cycle_A: 8.376 D_B: 0.234 G_B: 0.268 cycle_B: 0.134 G: 8.778 

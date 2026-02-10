@@ -1,0 +1,318 @@
+W0207 06:48:05.319505 2798831 site-packages/torch/distributed/run.py:792] 
+W0207 06:48:05.319505 2798831 site-packages/torch/distributed/run.py:792] *****************************************
+W0207 06:48:05.319505 2798831 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0207 06:48:05.319505 2798831 site-packages/torch/distributed/run.py:792] *****************************************
+----------------- Options ---------------
+               batch_size: 2                             
+                    beta1: 0.5                           
+          checkpoints_dir: ./checkpoints                 
+           continue_train: False                         
+                crop_size: 800                           	[default: 512]
+                 dataroot: ../datasets/sperm_instance_800_opt	[default: None]
+             dataset_mode: usseg                         	[default: template]
+                direction: AtoB                          
+             display_freq: 200                           
+              distributed: False                         	[default: None]
+                    epoch: latest                        
+              epoch_count: 1                             
+         freeze_GA_epochs: 300                           
+         freeze_GB_epochs: 300                           
+                 gan_mode: lsgan                         
+                  gpu_ids: 0,1,2,3,4,5,6,7               	[default: 0,1]
+                init_gain: 0.02                          
+                init_type: normal                        
+                 input_nc: 1                             
+                  isTrain: True                          	[default: None]
+                 lambda_A: 1.0                           
+                 lambda_B: 1.0                           
+                lambda_DA: 1.0                           
+                lambda_DB: 1.0                           
+                lambda_GA: 20.0                          	[default: 1.0]
+                lambda_GB: 20.0                          	[default: 1.0]
+                load_iter: 0                             	[default: 0]
+                load_size: 800                           	[default: 512]
+               local_rank: 0                             	[default: None]
+                       lr: 4e-05                         	[default: 0.0002]
+           lr_decay_iters: 150                           	[default: 50]
+                lr_policy: step                          	[default: linear]
+         max_dataset_size: inf                           
+            max_instances: 10                            	[default: 5]
+                    model: usseg                         	[default: cycle_gan]
+                 n_epochs: 150                           	[default: 100]
+           n_epochs_decay: 450                           	[default: 100]
+               n_layers_D: 3                             
+                     name: 800size_10ins_pregen          	[default: experiment_name]
+                      ndf: 64                            
+                     netD: basic                         
+                     netG: resnet_9blocks                
+                      ngf: 64                            
+               no_dropout: True                          
+                  no_flip: True                          	[default: False]
+                     norm: instance                      
+              num_threads: 4                             	[default: 8]
+                output_nc: 1                             
+                    phase: train                         
+                pool_size: 50                            
+                   pregen: checkpoints/800size_10ins_preseg/500_net_G_B.pth	[default: None]
+               preprocess: crop                          	[default: resize_and_crop]
+                   preseg: None                          
+               print_freq: 100                           
+                     rank: 0                             	[default: None]
+             save_by_iter: False                         
+          save_epoch_freq: 100                           
+         save_latest_freq: 4000                          
+           serial_batches: False                         
+                   suffix:                               
+                  use_amp: True                          	[default: False]
+                  verbose: False                         
+               world_size: 1                             	[default: None]
+----------------- End -------------------
+dataset [USSEGDataset] was created
+Using DistributedSampler: 125 samples per GPU
+DDP enabled: world_size=8, using DistributedSampler
+The number of training images = 1000 (total), 125 per GPU
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+initialize network with normal
+Generator model loaded from checkpoints/800size_10ins_preseg/500_net_G_B.pth
+Generator model loaded from checkpoints/800size_10ins_preseg/500_net_G_B.pth
+Generator model loaded from checkpoints/800size_10ins_preseg/500_net_G_B.pth
+Generator model loaded from checkpoints/800size_10ins_preseg/500_net_G_B.pth
+Generator model loaded from checkpoints/800size_10ins_preseg/500_net_G_B.pth
+Generator model loaded from checkpoints/800size_10ins_preseg/500_net_G_B.pth
+Generator model loaded from checkpoints/800size_10ins_preseg/500_net_G_B.pth
+Generator model loaded from checkpoints/800size_10ins_preseg/500_net_G_B.pth
+initialize network with normal
+initialize network with normal
+initialize network with normal
+model [USSEGModel] was created
+---------- Networks initialized -------------
+[Network G_A] Total number of parameters : 47.355 M
+[Network G_B] Total number of parameters : 12.546 M
+[Network D_A] Total number of parameters : 2.763 M
+[Network D_B] Total number of parameters : 2.763 M
+-----------------------------------------------
+create image directory ./checkpoints/800size_10ins_pregen/images...
+Start at:  1770446893.9652889
+[rank3]:[W207 06:48:15.305162121 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank5]:[W207 06:48:15.322717929 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank0]:[W207 06:48:15.344759406 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank1]:[W207 06:48:15.344848806 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank2]:[W207 06:48:15.363625110 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank6]:[W207 06:48:15.382851219 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank4]:[W207 06:48:15.403031096 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank7]:[W207 06:48:15.566798152 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+(epoch: 1, iters: 400, time: 1.072, data: 0.509) cycle_A: 68.367 D_A: 0.668 G_A: 14.311 D_B: 0.954 G_B: 23.125 cycle_B: 0.077 G: 105.879 D: 1.622 
+(epoch: 1, iters: 800, time: 0.696, data: 0.000) cycle_A: 58.891 D_A: 0.467 G_A: 12.127 D_B: 0.713 G_B: 18.541 cycle_B: 0.025 G: 89.584 D: 1.181 
+/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+learning rate 0.0000200 -> 0.0000200
+End of epoch 1 / 600 	 Time Taken: 79 sec
+/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/optim/lr_scheduler.py:227: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+(epoch: 2, iters: 208, time: 0.677, data: 0.000) cycle_A: 52.855 D_A: 0.432 G_A: 11.864 D_B: 0.547 G_B: 17.533 cycle_B: 0.014 G: 82.266 D: 0.979 
+(epoch: 2, iters: 608, time: 0.794, data: 0.000) cycle_A: 50.617 D_A: 0.383 G_A: 11.046 D_B: 0.431 G_B: 16.536 cycle_B: 0.008 G: 78.208 D: 0.814 
+learning rate 0.0000200 -> 0.0000200
+End of epoch 2 / 600 	 Time Taken: 55 sec
+(epoch: 3, iters: 16, time: 0.791, data: 0.000) cycle_A: 48.147 D_A: 0.394 G_A: 10.042 D_B: 0.353 G_B: 16.761 cycle_B: 0.007 G: 74.956 D: 0.747 
+(epoch: 3, iters: 416, time: 0.902, data: 0.001) cycle_A: 48.471 D_A: 0.386 G_A: 10.203 D_B: 0.291 G_B: 16.262 cycle_B: 0.010 G: 74.946 D: 0.677 
+W0207 06:51:00.496382 2798831 site-packages/torch/distributed/elastic/agent/server/api.py:719] Received Signals.SIGINT death signal, shutting down workers
+W0207 06:51:00.498343 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798959 closing signal SIGINT
+W0207 06:51:00.498602 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798960 closing signal SIGINT
+W0207 06:51:00.498761 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798961 closing signal SIGINT
+W0207 06:51:00.498908 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798962 closing signal SIGINT
+W0207 06:51:00.499056 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798963 closing signal SIGINT
+W0207 06:51:00.499202 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798964 closing signal SIGINT
+W0207 06:51:00.499344 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798965 closing signal SIGINT
+W0207 06:51:00.500628 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798966 closing signal SIGINT
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 194, in <module>
+[rank0]:     model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
+[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 286, in optimize_parameters
+[rank0]:     self.scaler.scale(loss_path1).backward(retain_graph=False)
+[rank0]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_tensor.py", line 626, in backward
+[rank0]:     torch.autograd.backward(
+[rank0]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank0]:     _engine_run_backward(
+[rank0]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank0]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank0]: KeyboardInterrupt
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 194, in <module>
+[rank7]:     model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
+[rank7]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 286, in optimize_parameters
+[rank7]:     self.scaler.scale(loss_path1).backward(retain_graph=False)
+[rank7]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_tensor.py", line 626, in backward
+[rank7]:     torch.autograd.backward(
+[rank7]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank7]:     _engine_run_backward(
+[rank7]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank7]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank7]: KeyboardInterrupt
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 194, in <module>
+[rank3]:     model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
+[rank3]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 286, in optimize_parameters
+[rank3]:     self.scaler.scale(loss_path1).backward(retain_graph=False)
+[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_tensor.py", line 626, in backward
+[rank3]:     torch.autograd.backward(
+[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank3]:     _engine_run_backward(
+[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank3]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank3]: KeyboardInterrupt
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 194, in <module>
+[rank6]:     model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
+[rank6]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 286, in optimize_parameters
+[rank6]:     self.scaler.scale(loss_path1).backward(retain_graph=False)
+[rank6]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_tensor.py", line 626, in backward
+[rank6]:     torch.autograd.backward(
+[rank6]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank6]:     _engine_run_backward(
+[rank6]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank6]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank6]: KeyboardInterrupt
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 194, in <module>
+[rank1]:     model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
+[rank1]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 286, in optimize_parameters
+[rank1]:     self.scaler.scale(loss_path1).backward(retain_graph=False)
+[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_tensor.py", line 626, in backward
+[rank1]:     torch.autograd.backward(
+[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank1]:     _engine_run_backward(
+[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank1]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank1]: KeyboardInterrupt
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 194, in <module>
+[rank2]:     model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
+[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 286, in optimize_parameters
+[rank2]:     self.scaler.scale(loss_path1).backward(retain_graph=False)
+[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_tensor.py", line 626, in backward
+[rank2]:     torch.autograd.backward(
+[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank2]:     _engine_run_backward(
+[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank2]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank2]: KeyboardInterrupt
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 194, in <module>
+[rank5]:     model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
+[rank5]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 286, in optimize_parameters
+[rank5]:     self.scaler.scale(loss_path1).backward(retain_graph=False)
+[rank5]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_tensor.py", line 626, in backward
+[rank5]:     torch.autograd.backward(
+[rank5]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/__init__.py", line 347, in backward
+[rank5]:     _engine_run_backward(
+[rank5]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/autograd/graph.py", line 823, in _engine_run_backward
+[rank5]:     return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[rank5]: KeyboardInterrupt
+W0207 06:51:00.846520 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798959 closing signal SIGTERM
+W0207 06:51:00.847457 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798960 closing signal SIGTERM
+W0207 06:51:00.848143 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798961 closing signal SIGTERM
+W0207 06:51:00.848635 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798962 closing signal SIGTERM
+W0207 06:51:00.849060 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798963 closing signal SIGTERM
+W0207 06:51:00.849726 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798964 closing signal SIGTERM
+W0207 06:51:00.850233 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798965 closing signal SIGTERM
+W0207 06:51:00.850608 2798831 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 2798966 closing signal SIGTERM
+Traceback (most recent call last):
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
+    result = self._invoke_run(role)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 2798831 got signal: 2
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/weijianwang/anaconda3/envs/VIS/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 260, in launch_agent
+    result = agent.run()
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/metrics/api.py", line 137, in wrapper
+    result = f(*args, **kwargs)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 720, in run
+    self._shutdown(e.sigval)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/local_elastic_agent.py", line 372, in _shutdown
+    self._pcontext.close(death_sig)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 572, in close
+    self._close(death_sig=death_sig, timeout=timeout)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 909, in _close
+    handler.proc.wait(time_to_wait)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/subprocess.py", line 1204, in wait
+    return self._wait(timeout=timeout)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/subprocess.py", line 1932, in _wait
+    time.sleep(delay)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 2798831 got signal: 2

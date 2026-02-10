@@ -61,8 +61,7 @@ class USSEGDataset(BaseDataset):
         for mask_file in mask_files[:self.max_instances]:  # 最多读取 max_instances 个
             mask_img = Image.open(mask_file).convert('L')  # 转为灰度图
             mask_tensor = self.transform_A(mask_img)  # (1, H, W)
-            # 二值化
-            mask_tensor = (mask_tensor > 0.5).float()
+            mask_tensor = (mask_tensor > 0.5).float() # 二值化
             masks.append(mask_tensor.squeeze(0))  # (H, W)
         
         if len(masks) == 0:

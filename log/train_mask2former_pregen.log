@@ -1,0 +1,278 @@
+W0207 11:52:50.147197 3781094 site-packages/torch/distributed/run.py:792] 
+W0207 11:52:50.147197 3781094 site-packages/torch/distributed/run.py:792] *****************************************
+W0207 11:52:50.147197 3781094 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0207 11:52:50.147197 3781094 site-packages/torch/distributed/run.py:792] *****************************************
+W0207 11:52:51.175295 3781094 site-packages/torch/distributed/elastic/agent/server/api.py:719] Received Signals.SIGINT death signal, shutting down workers
+W0207 11:52:51.175779 3781094 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 3781226 closing signal SIGINT
+Traceback (most recent call last):
+W0207 11:52:51.175981 3781094 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 3781227 closing signal SIGINT
+  File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 3, in <module>
+    import torch
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/__init__.py", line 2222, in <module>
+W0207 11:52:51.176165 3781094 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 3781228 closing signal SIGINT
+Traceback (most recent call last):
+  File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 3, in <module>
+Traceback (most recent call last):
+  File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 3, in <module>
+W0207 11:52:51.176325 3781094 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 3781229 closing signal SIGINT
+    import torch
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/__init__.py", line 2222, in <module>
+    import torch
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/__init__.py", line 2604, in <module>
+    from torch import quantization as quantization  # usort: skip
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/quantization/__init__.py", line 2, in <module>
+Traceback (most recent call last):
+  File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 3, in <module>
+W0207 11:52:51.176475 3781094 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 3781230 closing signal SIGINT
+    import torch
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/__init__.py", line 2604, in <module>
+    from .fake_quantize import *  # noqa: F403
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/quantization/fake_quantize.py", line 10, in <module>
+    Traceback (most recent call last):
+from torch import _meta_registrations    
+  File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 3, in <module>
+from torch import quantization as quantization  # usort: skip  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_meta_registrations.py", line 11, in <module>
+W0207 11:52:51.176627 3781094 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 3781231 closing signal SIGINT
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/quantization/__init__.py", line 2, in <module>
+    from torch._decomp import (
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_decomp/__init__.py", line 284, in <module>
+    from .fake_quantize import *  # noqa: F403
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/quantization/fake_quantize.py", line 10, in <module>
+    import torch
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/__init__.py", line 2151, in <module>
+        from torch.ao.quantization.fake_quantize import (from torch.ao.quantization.fake_quantize import (
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/__init__.py", line 12, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/__init__.py", line 12, in <module>
+Traceback (most recent call last):
+      File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 3, in <module>
+from torch import _meta_registrations
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_meta_registrations.py", line 11, in <module>
+W0207 11:52:51.176788 3781094 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 3781232 closing signal SIGINT
+    from torch._decomp import (
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_decomp/__init__.py", line 284, in <module>
+    import torch
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/__init__.py", line 2604, in <module>
+    import torch._decomp.decompositions    
+import torch._decomp.decompositions  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_decomp/decompositions.py", line 15, in <module>
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_decomp/decompositions.py", line 15, in <module>
+    from .pt2e._numeric_debugger import (  # noqa: F401
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/pt2e/_numeric_debugger.py", line 8, in <module>
+from .pt2e._numeric_debugger import (  # noqa: F401
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/pt2e/_numeric_debugger.py", line 8, in <module>
+Traceback (most recent call last):
+W0207 11:52:51.176939 3781094 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 3781233 closing signal SIGINT
+  File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 3, in <module>
+    from torch import (
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/nested/__init__.py", line 21, in <module>
+        import torchimport torch._prims as prims
+    
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/__init__.py", line 2222, in <module>
+    import torch._prims as prims  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 935, in <module>
+from torch.ao.quantization.pt2e.graph_utils import get_control_flow_submodulesfrom torch.ao.quantization.pt2e.graph_utils import get_control_flow_submodules
+    
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 833, in <module>
+from torch import _meta_registrations  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/pt2e/graph_utils.py", line 8, in <module>
+Traceback (most recent call last):
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/pt2e/graph_utils.py", line 8, in <module>
+
+  File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 3, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_meta_registrations.py", line 11, in <module>
+    from torch._decomp import (
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_decomp/__init__.py", line 284, in <module>
+    tan = _make_elementwise_unary_prim(
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 492, in _make_elementwise_unary_prim
+    log2 = _make_elementwise_unary_prim(
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 492, in _make_elementwise_unary_prim
+    from ._internal.nested_tensor import NestedTensor as _NestedTensor, _rebuild_njt
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/nested/_internal/nested_tensor.py", line 8, in <module>
+import torch._decomp.decompositions
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_decomp/decompositions.py", line 15, in <module>
+import torch            
+    return _make_prim(    from torch.fx.passes.utils.source_matcher_utils import (from torch.fx.passes.utils.source_matcher_utils import (  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/__init__.py", line 2222, in <module>
+return _make_prim(
+import torch._prims as prims
+
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 338, in _make_prim
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/passes/__init__.py", line 1, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/passes/__init__.py", line 1, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 320, in _make_prim
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 524, in <module>
+    overload_tags = [
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 339, in <listcomp>
+    prim_def = torch.library.custom_op(
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 145, in custom_op
+    from torch import quantization as quantization  # usort: skip
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/quantization/__init__.py", line 2, in <module>
+abs = _make_elementwise_unary_prim(
+          File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 492, in _make_elementwise_unary_prim
+getattr(aten_packet, overload).tags for overload in aten_packet.overloads()return inner(fn)
+    
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_ops.py", line 1099, in __getattr__
+from torch.nested._internal.nested_int import NestedIntNode  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 126, in inner
+from .fake_quantize import *  # noqa: F403        
+
+from . import (from . import (  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/nested/_internal/nested_int.py", line 4, in <module>
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/quantization/fake_quantize.py", line 10, in <module>
+    
+
+return _make_prim(result = CustomOpDef(namespace, opname, schema_str, fn)  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/passes/graph_drawer.py", line 13, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/passes/graph_drawer.py", line 13, in <module>
+
+
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_prims/__init__.py", line 320, in _make_prim
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 174, in __init__
+from torch.ao.quantization.fake_quantize import (
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/__init__.py", line 12, in <module>
+            self._register_to_dispatcher()prim_def = torch.library.custom_op(from .pt2e._numeric_debugger import (  # noqa: F401
+
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 596, in _register_to_dispatcher
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 145, in custom_op
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/pt2e/_numeric_debugger.py", line 9, in <module>
+    from torch import quantization as quantization  # usort: skip
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/quantization/__init__.py", line 2, in <module>
+from torch.fx.experimental._constant_symnode import ConstantIntNode        
+from torch.export import ExportedProgramreturn inner(fn)  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/__init__.py", line 87, in <module>
+
+    
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/export/__init__.py", line 68, in <module>
+from .fake_quantize import *  # noqa: F403  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 126, in inner
+    
+    autograd_impl = autograd.make_autograd_impl(self._opoverload, self)      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/quantization/fake_quantize.py", line 10, in <module>
+from torch.fx.passes.shape_prop import TensorMetadata
+from torch.fx.passes.shape_prop import TensorMetadata    
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/autograd.py", line 29, in make_autograd_impl
+
+    result = CustomOpDef(namespace, opname, schema_str, fn)  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/passes/shape_prop.py", line 8, in <module>
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/passes/shape_prop.py", line 10, in <module>
+from torch.fx._symbolic_trace import (  # noqa: F401
+from torch.ao.quantization.fake_quantize import (
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 174, in __init__
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/_symbolic_trace.py", line 32, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/__init__.py", line 12, in <module>
+    self._register_to_dispatcher()
+          File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/custom_ops.py", line 594, in _register_to_dispatcher
+setattr(self, key, overload)from .pt2e._numeric_debugger import (  # noqa: F401
+
+KeyboardInterrupt  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/pt2e/_numeric_debugger.py", line 8, in <module>
+
+        from torch.ao.quantization.pt2e.graph_utils import get_control_flow_submodules    from .decomp_utils import CustomDecompTable
+class Metadata:
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/ao/quantization/pt2e/graph_utils.py", line 8, in <module>
+
+          File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/export/decomp_utils.py", line 5, in <module>
+from torch._subclasses.meta_utils import is_sparse_any  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/dataclasses.py", line 1178, in dataclass
+from torch._dispatch.python import enable_python_dispatcherlib._register_fake(self._name, fake_impl, _stacklevel=4)    
+
+
+from torch.fx.passes.utils.source_matcher_utils import (  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_subclasses/__init__.py", line 2, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_dispatch/python.py", line 3, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/library.py", line 177, in _register_fake
+
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/passes/__init__.py", line 1, in <module>
+from ._lazy_graph_module import _make_graph_module
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/_lazy_graph_module.py", line 4, in <module>
+        from . import (source = torch._library.utils.get_source(_stacklevel + 1)
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/passes/graph_drawer.py", line 13, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_library/utils.py", line 53, in get_source
+    from torch.fx.passes.shape_prop import TensorMetadata    
+from torch._export.utils import (  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/passes/shape_prop.py", line 9, in <module>
+
+          File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_export/__init__.py", line 48, in <module>
+from torch._subclasses.fake_tensor import (import unittest.mock    
+
+from torch._guards import detect_fake_mode  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_subclasses/fake_tensor.py", line 1014, in <module>
+      File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/unittest/mock.py", line 39, in <module>
+
+from torch.fx.graph_module import (  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_guards.py", line 349, in <module>
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/graph_module.py", line 20, in <module>
+    frame = inspect.getframeinfo(sys._getframe(stacklevel))
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/inspect.py", line 1627, in getframeinfo
+    from .wrappers import _wrap_submodules
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_export/wrappers.py", line 7, in <module>
+    return wrap(cls)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/dataclasses.py", line 1169, in wrap
+        class InvalidSpecError(Exception):from .graph import _custom_builtins, _is_from_torch, _PyTreeCodeGen, Graph, PythonCode
+
+KeyboardInterrupt  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/graph.py", line 37, in <module>
+
+    class GuardEnvExpr:
+KeyboardInterrupt    
+    return _process_class(cls, init, repr, eq, order, unsafe_hash,from torch._higher_order_ops.strict_mode import strict_mode
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/dataclasses.py", line 950, in _process_class
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_higher_order_ops/__init__.py", line 9, in <module>
+    class _DispatchCacheKey:
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/dataclasses.py", line 1178, in dataclass
+    from .node import _get_qualified_name, _type_repr, Argument, map_arg, Node, Target    
+cls_fields.append(_get_field(cls, name, type, kw_only))  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/node.py", line 22, in <module>
+
+KeyboardInterrupt
+    from torch._higher_order_ops.scan import scan
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_higher_order_ops/scan.py", line 408, in <module>
+    return wrap(cls)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/dataclasses.py", line 1169, in wrap
+    lines, lnum = findsource(frame)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/inspect.py", line 952, in findsource
+    from torch.fx.operator_schemas import (
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/operator_schemas.py", line 215, in <module>
+    return _process_class(cls, init, repr, eq, order, unsafe_hash,
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/dataclasses.py", line 1019, in _process_class
+    module = getmodule(object, file)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/inspect.py", line 878, in getmodule
+    scan_op.py_impl(DispatchKey.Autograd)(
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/_ops.py", line 116, in inner
+    _init_fn(all_init_fields,
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/dataclasses.py", line 574, in _init_fn
+    if isinstance(k, torch._C._functorch.TransformType):
+KeyboardInterrupt
+    def get_signature_for_torch_op(op: Callable, return_schemas: bool = False):
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/fx/_compatibility.py", line 30, in mark_not_back_compat
+        os.path.realpath(f)] = module.__name__return _create_fn('__init__',
+
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/posixpath.py", line 395, in realpath
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/dataclasses.py", line 434, in _create_fn
+        exec(txt, globals, ns)path, ok = _joinrealpath(filename[:0], filename, strict, {})
+
+  File "<string>", line 1, in <module>
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/posixpath.py", line 430, in _joinrealpath
+    docstring = textwrap.dedent(getattr(fn, "__doc__", None) or "")
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/textwrap.py", line 469, in dedent
+KeyboardInterrupt
+    st = os.lstat(newpath)
+KeyboardInterrupt
+    text = re.sub(r'(?m)^' + margin, '', text)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/re.py", line 209, in sub
+    return _compile(pattern, flags).sub(repl, string, count)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/home/weijianwang/anaconda3/envs/VIS/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/run.py", line 918, in main
+    run(args)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/run.py", line 909, in run
+    elastic_launch(
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 260, in launch_agent
+    result = agent.run()
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/metrics/api.py", line 137, in wrapper
+    result = f(*args, **kwargs)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
+    result = self._invoke_run(role)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 3781094 got signal: 2

@@ -27,15 +27,6 @@ def is_instance_mask_tensor(data):
     if N == 1 or N == 3:
         return False
 
-    # 如果通道数为2，检查值范围来判断
-    # 实例掩码通常值在[0, 1]或[-1, 1]范围
-    if N == 2:
-        min_val = data.min().item()
-        max_val = data.max().item()
-        # 如果值在[0, 1]或[-1, 1]范围，认为是实例掩码
-        if (min_val >= -1.1 and max_val <= 1.1):
-            return True
-
     return False
 
 
@@ -59,7 +50,7 @@ class Visualizer():
 
         # create a logging file to store training losses
         self.log_name = os.path.join(opt.checkpoints_dir, opt.name, 'loss_log.txt')
-        with open(self.log_name, "a") as log_file:
+        with open(self.log_name, "w") as log_file:
             now = time.strftime("%c")
             log_file.write('================ Training Loss (%s) ================\n' % now)
 
@@ -85,18 +76,10 @@ class Visualizer():
 
             # save images to the disk
             for label, image_data in visuals.items():
-                # 根据变量名和形状判断是否为实例掩码 (B, N, H, W)
-                # real_A, fake_A, rec_A 等以 _A 结尾的变量是实例掩码
-                is_instance_mask = False
-                if isinstance(image_data, torch.Tensor) and image_data.dim() == 4:
-                    B, N, H, W = image_data.shape
-                    # 检查是否为 _A 类型的实例掩码（形状为 (B, N, H, W)，N为实例数）
-                    if label.endswith('_A') or label.endswith('A'):
-                        is_instance_mask = True
-                    # 或者使用原有的判断逻辑作为后备
-                    elif is_instance_mask_tensor(image_data):
-                        is_instance_mask = True
-                
+                # 通过张量维度和形状判断是否为实例掩码 (B, N, H, W)
+                # 不依赖变量名，只看数据的实际形状
+                is_instance_mask = is_instance_mask_tensor(image_data)
+
                 if is_instance_mask:
                     # 为实例掩码创建子文件夹（在epoch文件夹下）
                     mask_folder = os.path.join(epoch_dir, label)

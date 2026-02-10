@@ -148,7 +148,9 @@ if __name__ == '__main__':
         # Only create visualizer on main process
         if is_main_process():
             visualizer = Visualizer(opt)   # create a visualizer that display/save images and plots
-        
+            training_start_time = time.time()  # record training start time
+            print("Start at: ", training_start_time)
+
         total_iters = 0                # the total number of training iterations
 
         for epoch in range(opt.epoch_count, opt.n_epochs + opt.n_epochs_decay + 1):    # outer loop for different epochs
@@ -175,9 +177,8 @@ if __name__ == '__main__':
 
                 # Visualize on main process only
                 if is_main_process():
-                    if total_iters % opt.display_freq == 0:   # display images on visdom and save images to a HTML file
-                        save_result = total_iters % opt.update_html_freq == 0
-                        visualizer.display_current_results(model.get_current_visuals(), epoch, save_result)
+                    if total_iters % opt.display_freq == 0:   # save images
+                        visualizer.display_current_results(model.get_current_visuals(), epoch, save_result=True)
 
                 # Print losses - all processes participate in reduction, only rank 0 prints
                 if total_iters % opt.print_freq == 0:
@@ -218,6 +219,17 @@ if __name__ == '__main__':
             
             if is_main_process():
                 print('End of epoch %d / %d \t Time Taken: %d sec' % (epoch, opt.n_epochs + opt.n_epochs_decay, time.time() - epoch_start_time))
-    
+
+        # Log total training time
+        if is_main_process():
+            total_training_time = time.time() - training_start_time
+            print('=' * 80)
+            print('Training completed!')
+            print('End at: ', time.time())
+            hours = int(total_training_time // 3600)
+            minutes = int((total_training_time % 3600) // 60)
+            seconds = int(total_training_time % 60)
+            print('Total training time: %d hours %d minutes %d seconds (%.2f seconds)' % (hours, minutes, seconds, total_training_time))
+
     finally:
         cleanup_ddp()

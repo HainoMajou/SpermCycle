@@ -2,7 +2,7 @@ import os
 import torch
 from collections import OrderedDict
 from abc import ABC, abstractmethod
-from . import networks
+from .networks import utils
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 
@@ -45,6 +45,8 @@ class BaseModel(ABC):
         self.optimizers = []
         self.image_paths = []
         self.metric = 0  # used for learning rate policy 'plateau'
+        self.use_amp = getattr(opt, 'use_amp', False) # AMP混合精度训练
+        self.scaler = torch.amp.GradScaler("cuda") if self.use_amp else None
 
     @staticmethod
     def modify_commandline_options(parser, is_train):
@@ -85,7 +87,7 @@ class BaseModel(ABC):
             opt (Option class) -- stores all the experiment flags; needs to be a subclass of BaseOptions
         """
         if self.isTrain:
-            self.schedulers = [networks.get_scheduler(optimizer, opt) for optimizer in self.optimizers]
+            self.schedulers = [utils.get_scheduler(optimizer, opt) for optimizer in self.optimizers]
         if not self.isTrain or opt.continue_train:
             load_suffix = 'iter_%d' % opt.load_iter if opt.load_iter > 0 else opt.epoch
             self.load_networks(load_suffix)
@@ -134,11 +136,16 @@ class BaseModel(ABC):
             print('learning rate %.7f -> %.7f' % (old_lr, lr))
 
     def get_current_visuals(self):
-        """Return visualization images. train.py will display these images with visdom, and save the images to a HTML"""
+        """Return visualization images. train.py will save these images"""
         visual_ret = OrderedDict()
         for name in self.visual_names:
             if isinstance(name, str):
-                visual_ret[name] = getattr(self, name)
+                # 优化: 将数据移到CPU并detach，释放GPU显存
+                tensor = getattr(self, name)
+                if isinstance(tensor, torch.Tensor):
+                    visual_ret[name] = tensor.detach().cpu()
+                else:
+                    visual_ret[name] = tensor
         return visual_ret
 
     def get_current_losses(self):
@@ -250,3 +257,22 @@ class BaseModel(ABC):
             if net is not None:
                 for param in net.parameters():
                     param.requires_grad = requires_grad
+
+    def print_tensor_info(self, data):
+        """
+        对于张量则输出其shape，对于张量的list则输出list长度和其中的张量形状
+
+        Args:
+            data: 张量或张量的列表
+        """
+        if isinstance(data, torch.Tensor):
+            print(f"Tensor shape: {data.shape}")
+        elif isinstance(data, list):
+            print(f"List length: {len(data)}")
+            for i, tensor in enumerate(data):
+                if isinstance(tensor, torch.Tensor):
+                    print(f"  [{i}] shape: {tensor.shape}")
+                else:
+                    print(f"  [{i}] not a tensor, type: {type(tensor)}")
+        else:
+            print(f"Unsupported type: {type(data)}")

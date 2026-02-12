@@ -1,313 +1,126 @@
-W0205 13:49:32.151690 1569317 site-packages/torch/distributed/run.py:792] 
-W0205 13:49:32.151690 1569317 site-packages/torch/distributed/run.py:792] *****************************************
-W0205 13:49:32.151690 1569317 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
-W0205 13:49:32.151690 1569317 site-packages/torch/distributed/run.py:792] *****************************************
-W0205 13:49:36.307321 1569317 site-packages/torch/distributed/elastic/agent/server/api.py:719] Received Signals.SIGINT death signal, shutting down workers
-W0205 13:49:36.308268 1569317 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1569506 closing signal SIGINT
-W0205 13:49:36.308543 1569317 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1569507 closing signal SIGINT
-W0205 13:49:36.308706 1569317 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1569508 closing signal SIGINT
-W0205 13:49:36.308839 1569317 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1569509 closing signal SIGINT
-[rank0]: Traceback (most recent call last):
-[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 121, in <module>
-[rank0]:     opt = TrainOptions().parse()   # get training options
-[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/options/base_options.py", line 116, in parse
-[rank0]:     opt = self.gather_options()
-[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/options/base_options.py", line 76, in gather_options
-[rank0]:     model_option_setter = models.get_option_setter(model_name)
-[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/__init__.py", line 50, in get_option_setter
-[rank0]:     model_class = find_model_using_name(model_name)
-[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/__init__.py", line 33, in find_model_using_name
-[rank0]:     modellib = importlib.import_module(model_filename)
-[rank0]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/importlib/__init__.py", line 126, in import_module
-[rank0]:     return _bootstrap._gcd_import(name[level:], package, level)
-[rank0]:   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
-[rank0]:   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
-[rank0]:   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
-[rank0]:   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
-[rank0]:   File "<frozen importlib._bootstrap_external>", line 883, in exec_module
-[rank0]:   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 6, in <module>
-[rank0]:     from .networks import generator, discriminator
-[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/networks/generator.py", line 7, in <module>
-[rank0]:     from .mask2former import Mask2FormerWrapper
-[rank0]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/networks/mask2former.py", line 4, in <module>
-[rank0]:     from transformers import Mask2FormerConfig, Mask2FormerForUniversalSegmentation
-[rank0]:   File "<frozen importlib._bootstrap>", line 1075, in _handle_fromlist
-[rank0]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
-[rank0]:     module = self._get_module(self._class_to_module[name])
-[rank0]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
-[rank0]:     return importlib.import_module("." + module_name, self.__name__)
-[rank0]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/importlib/__init__.py", line 126, in import_module
-[rank0]:     return _bootstrap._gcd_import(name[level:], package, level)
-[rank0]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/models/mask2former/modeling_mask2former.py", line 1077, in <module>
-[rank0]:     class Mask2FormerPixelDecoderEncoderOnly(nn.Module):
-[rank0]: KeyboardInterrupt
-[rank1]: Traceback (most recent call last):
-[rank1]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 145, in <module>
-[rank1]:     model = create_model(opt)      # create a model given opt.model and other options
-[rank1]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/__init__.py", line 65, in create_model
-[rank1]:     instance = model(opt)
-[rank1]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 94, in __init__
-[rank1]:     self.netG_A = generator.define_Mask2Former(
-[rank1]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/networks/generator.py", line 137, in define_Mask2Former
-[rank1]:     net = Mask2FormerWrapper(pretrained=pretrained, num_queries=num_queries)
-[rank1]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/networks/mask2former.py", line 27, in __init__
-[rank1]:     config = Mask2FormerConfig.from_pretrained("facebook/mask2former-swin-tiny-coco-instance")
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/configuration_utils.py", line 622, in from_pretrained
-[rank1]:     config_dict, kwargs = cls.get_config_dict(pretrained_model_name_or_path, **kwargs)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/configuration_utils.py", line 662, in get_config_dict
-[rank1]:     config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/configuration_utils.py", line 721, in _get_config_dict
-[rank1]:     resolved_config_file = cached_file(
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/hub.py", line 322, in cached_file
-[rank1]:     file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/hub.py", line 479, in cached_files
-[rank1]:     hf_hub_download(
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-[rank1]:     return fn(*args, **kwargs)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1008, in hf_hub_download
-[rank1]:     return _hf_hub_download_to_cache_dir(
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1071, in _hf_hub_download_to_cache_dir
-[rank1]:     (url_to_download, etag, commit_hash, expected_size, xet_file_data, head_call_error) = _get_metadata_or_catch_error(
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1544, in _get_metadata_or_catch_error
-[rank1]:     metadata = get_hf_file_metadata(
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-[rank1]:     return fn(*args, **kwargs)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1461, in get_hf_file_metadata
-[rank1]:     r = _request_wrapper(
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 286, in _request_wrapper
-[rank1]:     response = _request_wrapper(
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 309, in _request_wrapper
-[rank1]:     response = http_backoff(method=method, url=url, **params, retry_on_exceptions=(), retry_on_status_codes=(429,))
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 310, in http_backoff
-[rank1]:     response = session.request(method=method, url=url, **kwargs)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-[rank1]:     resp = self.send(prep, **send_kwargs)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-[rank1]:     r = adapter.send(request, **kwargs)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 96, in send
-[rank1]:     return super().send(request, *args, **kwargs)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/requests/adapters.py", line 644, in send
-[rank1]:     resp = conn.urlopen(
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
-[rank1]:     response = self._make_request(
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
-[rank1]:     response = conn.getresponse()
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/urllib3/connection.py", line 571, in getresponse
-[rank1]:     httplib_response = super().getresponse()
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/http/client.py", line 1368, in getresponse
-[rank1]:     response.begin()
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/http/client.py", line 317, in begin
-[rank1]:     version, status, reason = self._read_status()
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/http/client.py", line 278, in _read_status
-[rank1]:     line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/socket.py", line 705, in readinto
-[rank1]:     return self._sock.recv_into(b)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/ssl.py", line 1273, in recv_into
-[rank1]:     return self.read(nbytes, buffer)
-[rank1]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/ssl.py", line 1129, in read
-[rank1]:     return self._sslobj.read(len, buffer)
-[rank1]: KeyboardInterrupt
-[rank3]: Traceback (most recent call last):
-[rank3]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 145, in <module>
-[rank3]:     model = create_model(opt)      # create a model given opt.model and other options
-[rank3]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/__init__.py", line 65, in create_model
-[rank3]:     instance = model(opt)
-[rank3]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 94, in __init__
-[rank3]:     self.netG_A = generator.define_Mask2Former(
-[rank3]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/networks/generator.py", line 137, in define_Mask2Former
-[rank3]:     net = Mask2FormerWrapper(pretrained=pretrained, num_queries=num_queries)
-[rank3]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/networks/mask2former.py", line 27, in __init__
-[rank3]:     config = Mask2FormerConfig.from_pretrained("facebook/mask2former-swin-tiny-coco-instance")
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/configuration_utils.py", line 622, in from_pretrained
-[rank3]:     config_dict, kwargs = cls.get_config_dict(pretrained_model_name_or_path, **kwargs)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/configuration_utils.py", line 662, in get_config_dict
-[rank3]:     config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/configuration_utils.py", line 721, in _get_config_dict
-[rank3]:     resolved_config_file = cached_file(
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/hub.py", line 322, in cached_file
-[rank3]:     file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/hub.py", line 479, in cached_files
-[rank3]:     hf_hub_download(
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-[rank3]:     return fn(*args, **kwargs)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1008, in hf_hub_download
-[rank3]:     return _hf_hub_download_to_cache_dir(
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1071, in _hf_hub_download_to_cache_dir
-[rank3]:     (url_to_download, etag, commit_hash, expected_size, xet_file_data, head_call_error) = _get_metadata_or_catch_error(
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1544, in _get_metadata_or_catch_error
-[rank3]:     metadata = get_hf_file_metadata(
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
-[rank3]:     return fn(*args, **kwargs)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 1461, in get_hf_file_metadata
-[rank3]:     r = _request_wrapper(
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 305, in _request_wrapper
-[rank3]:     return _request_wrapper(method=method, url=next_url, follow_relative_redirects=True, **params)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 286, in _request_wrapper
-[rank3]:     response = _request_wrapper(
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/file_download.py", line 309, in _request_wrapper
-[rank3]:     response = http_backoff(method=method, url=url, **params, retry_on_exceptions=(), retry_on_status_codes=(429,))
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 310, in http_backoff
-[rank3]:     response = session.request(method=method, url=url, **kwargs)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
-[rank3]:     resp = self.send(prep, **send_kwargs)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
-[rank3]:     r = adapter.send(request, **kwargs)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 96, in send
-[rank3]:     return super().send(request, *args, **kwargs)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/requests/adapters.py", line 644, in send
-[rank3]:     resp = conn.urlopen(
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
-[rank3]:     response = self._make_request(
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
-[rank3]:     response = conn.getresponse()
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/urllib3/connection.py", line 571, in getresponse
-[rank3]:     httplib_response = super().getresponse()
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/http/client.py", line 1368, in getresponse
-[rank3]:     response.begin()
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/http/client.py", line 317, in begin
-[rank3]:     version, status, reason = self._read_status()
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/http/client.py", line 278, in _read_status
-[rank3]:     line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/socket.py", line 705, in readinto
-[rank3]:     return self._sock.recv_into(b)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/ssl.py", line 1273, in recv_into
-[rank3]:     return self.read(nbytes, buffer)
-[rank3]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/ssl.py", line 1129, in read
-[rank3]:     return self._sslobj.read(len, buffer)
-[rank3]: KeyboardInterrupt
-[rank2]: Traceback (most recent call last):
-[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/train.py", line 121, in <module>
-[rank2]:     opt = TrainOptions().parse()   # get training options
-[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/options/base_options.py", line 116, in parse
-[rank2]:     opt = self.gather_options()
-[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/options/base_options.py", line 76, in gather_options
-[rank2]:     model_option_setter = models.get_option_setter(model_name)
-[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/__init__.py", line 50, in get_option_setter
-[rank2]:     model_class = find_model_using_name(model_name)
-[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/__init__.py", line 33, in find_model_using_name
-[rank2]:     modellib = importlib.import_module(model_filename)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/importlib/__init__.py", line 126, in import_module
-[rank2]:     return _bootstrap._gcd_import(name[level:], package, level)
-[rank2]:   File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
-[rank2]:   File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
-[rank2]:   File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
-[rank2]:   File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
-[rank2]:   File "<frozen importlib._bootstrap_external>", line 883, in exec_module
-[rank2]:   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
-[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/usseg_model.py", line 6, in <module>
-[rank2]:     from .networks import generator, discriminator
-[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/networks/generator.py", line 7, in <module>
-[rank2]:     from .mask2former import Mask2FormerWrapper
-[rank2]:   File "/disk/weijianwang/VIS-tracking/Sperm-main/models/networks/mask2former.py", line 4, in <module>
-[rank2]:     from transformers import Mask2FormerConfig, Mask2FormerForUniversalSegmentation
-[rank2]:   File "<frozen importlib._bootstrap>", line 1075, in _handle_fromlist
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
-[rank2]:     module = self._get_module(self._class_to_module[name])
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
-[rank2]:     return importlib.import_module("." + module_name, self.__name__)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/importlib/__init__.py", line 126, in import_module
-[rank2]:     return _bootstrap._gcd_import(name[level:], package, level)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/models/mask2former/modeling_mask2former.py", line 28, in <module>
-[rank2]:     from ...modeling_layers import GradientCheckpointingLayer
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/modeling_layers.py", line 27, in <module>
-[rank2]:     from .models.auto import AutoModel
-[rank2]:   File "<frozen importlib._bootstrap>", line 1075, in _handle_fromlist
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
-[rank2]:     module = self._get_module(self._class_to_module[name])
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
-[rank2]:     return importlib.import_module("." + module_name, self.__name__)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/importlib/__init__.py", line 126, in import_module
-[rank2]:     return _bootstrap._gcd_import(name[level:], package, level)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/models/auto/modeling_auto.py", line 23, in <module>
-[rank2]:     from .auto_factory import (
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 43, in <module>
-[rank2]:     from ...generation import GenerationMixin
-[rank2]:   File "<frozen importlib._bootstrap>", line 1075, in _handle_fromlist
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 2317, in __getattr__
-[rank2]:     module = self._get_module(self._class_to_module[name])
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 2345, in _get_module
-[rank2]:     return importlib.import_module("." + module_name, self.__name__)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/importlib/__init__.py", line 126, in import_module
-[rank2]:     return _bootstrap._gcd_import(name[level:], package, level)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/generation/utils.py", line 55, in <module>
-[rank2]:     from .candidate_generator import (
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/transformers/generation/candidate_generator.py", line 29, in <module>
-[rank2]:     from sklearn.metrics import roc_curve
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/sklearn/__init__.py", line 73, in <module>
-[rank2]:     from .base import clone  # noqa: E402
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/sklearn/base.py", line 19, in <module>
-[rank2]:     from .utils._metadata_requests import _MetadataRequester, _routing_enabled
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/sklearn/utils/__init__.py", line 9, in <module>
-[rank2]:     from ._chunking import gen_batches, gen_even_slices
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/sklearn/utils/_chunking.py", line 11, in <module>
-[rank2]:     from ._param_validation import Interval, validate_params
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/sklearn/utils/_param_validation.py", line 17, in <module>
-[rank2]:     from .validation import _is_arraylike_not_scalar
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/sklearn/utils/validation.py", line 21, in <module>
-[rank2]:     from ..utils._array_api import _asarray_with_order, _is_numpy_namespace, get_namespace
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/sklearn/utils/_array_api.py", line 20, in <module>
-[rank2]:     from .fixes import parse_version
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/sklearn/utils/fixes.py", line 16, in <module>
-[rank2]:     import scipy.stats
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/scipy/stats/__init__.py", line 652, in <module>
-[rank2]:     from ._new_distributions import Normal, Uniform
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/scipy/stats/_new_distributions.py", line 375, in <module>
-[rank2]:     _module[dist_name].__doc__ = _combine_docs(_module[dist_name])
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/scipy/stats/_distribution_infrastructure.py", line 1263, in _combine_docs
-[rank2]:     superdoc = ClassDoc(ContinuousDistribution)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/scipy/_lib/_docscrape.py", line 649, in __init__
-[rank2]:     NumpyDocString.__init__(self, doc)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/scipy/_lib/_docscrape.py", line 148, in __init__
-[rank2]:     self._parse()
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/scipy/_lib/_docscrape.py", line 412, in _parse
-[rank2]:     self[section] = self._parse_param_list(content)
-[rank2]:   File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/scipy/_lib/_docscrape.py", line 247, in _parse_param_list
-[rank2]:     params.append(Parameter(arg_name, arg_type, desc))
-[rank2]:   File "<string>", line 1, in <lambda>
-[rank2]: KeyboardInterrupt
-W0205 13:49:36.813562 1569317 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1569506 closing signal SIGTERM
-W0205 13:49:36.814450 1569317 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1569507 closing signal SIGTERM
-W0205 13:49:36.814921 1569317 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1569508 closing signal SIGTERM
-W0205 13:49:36.815452 1569317 site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 1569509 closing signal SIGTERM
-Traceback (most recent call last):
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 711, in run
-    result = self._invoke_run(role)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
-    time.sleep(monitor_interval)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
-    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
-torch.distributed.elastic.multiprocessing.api.SignalException: Process 1569317 got signal: 2
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/weijianwang/anaconda3/envs/VIS/bin/torchrun", line 7, in <module>
-    sys.exit(main())
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
-    return f(*args, **kwargs)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/run.py", line 918, in main
-    run(args)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/run.py", line 909, in run
-    elastic_launch(
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
-    return launch_agent(self._config, self._entrypoint, list(args))
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 260, in launch_agent
-    result = agent.run()
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/metrics/api.py", line 137, in wrapper
-    result = f(*args, **kwargs)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/api.py", line 720, in run
-    self._shutdown(e.sigval)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/agent/server/local_elastic_agent.py", line 372, in _shutdown
-    self._pcontext.close(death_sig)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 572, in close
-    self._close(death_sig=death_sig, timeout=timeout)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 909, in _close
-    handler.proc.wait(time_to_wait)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/subprocess.py", line 1204, in wait
-    return self._wait(timeout=timeout)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/subprocess.py", line 1932, in _wait
-    time.sleep(delay)
-  File "/home/weijianwang/anaconda3/envs/VIS/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 84, in _terminate_process_handler
-    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
-torch.distributed.elastic.multiprocessing.api.SignalException: Process 1569317 got signal: 2
+W0212 10:05:18.425859 2126390 site-packages/torch/distributed/run.py:792] 
+W0212 10:05:18.425859 2126390 site-packages/torch/distributed/run.py:792] *****************************************
+W0212 10:05:18.425859 2126390 site-packages/torch/distributed/run.py:792] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0212 10:05:18.425859 2126390 site-packages/torch/distributed/run.py:792] *****************************************
+----------------- Options ---------------
+               batch_size: 2                             
+                    beta1: 0.5                           
+          checkpoints_dir: ./checkpoints                 
+           continue_train: False                         
+                crop_size: 800                           	[default: 512]
+                 dataroot: ../datasets/sperm_instance_800_opt	[default: None]
+             dataset_mode: usseg                         	[default: template]
+                direction: AtoB                          
+             display_freq: 200                           
+              distributed: False                         	[default: None]
+                    epoch: latest                        
+              epoch_count: 1                             
+                 gan_mode: lsgan                         
+                  gpu_ids: 4,5,6,0                       	[default: 0,1]
+                init_gain: 0.02                          
+                init_type: normal                        
+                 input_nc: 1                             
+                  isTrain: True                          	[default: None]
+                 lambda_A: 1.0                           
+                 lambda_B: 1.0                           
+                lambda_DA: 1.0                           
+                lambda_DB: 1.0                           
+                lambda_GA: 20.0                          	[default: 1.0]
+                lambda_GB: 20.0                          	[default: 1.0]
+                load_iter: 0                             	[default: 0]
+                load_size: 800                           	[default: 512]
+               local_rank: 0                             	[default: None]
+                       lr: 0.0001                        	[default: 0.0002]
+           lr_decay_iters: 150                           	[default: 50]
+                lr_policy: step                          	[default: linear]
+         max_dataset_size: inf                           
+            max_instances: 10                            	[default: 5]
+                    model: usseg                         	[default: cycle_gan]
+                 n_epochs: 150                           	[default: 100]
+           n_epochs_decay: 450                           	[default: 100]
+               n_layers_D: 3                             
+                     name: 800size_10ins                 	[default: experiment_name]
+                      ndf: 64                            
+                     netD: basic                         
+                     netG: resnet_9blocks                
+                      ngf: 64                            
+               no_dropout: True                          
+                  no_flip: True                          	[default: False]
+                     norm: instance                      
+              num_threads: 4                             	[default: 8]
+                output_nc: 1                             
+                    phase: train                         
+                pool_size: 50                            
+                   pregen: None                          
+               preprocess: none                          	[default: resize_and_crop]
+                   preseg: None                          
+               print_freq: 100                           
+                     rank: 0                             	[default: None]
+             save_by_iter: False                         
+          save_epoch_freq: 100                           
+         save_latest_freq: 4000                          
+           serial_batches: False                         
+                   suffix:                               
+                  use_amp: True                          	[default: False]
+                  verbose: False                         
+               world_size: 1                             	[default: None]
+----------------- End -------------------
+dataset [USSEGDataset] was created
+Using DistributedSampler: 250 samples per GPU
+DDP enabled: world_size=4, using DistributedSampler
+The number of training images = 1000 (total), 250 per GPU
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+Some weights of SwinBackbone were not initialized from the model checkpoint at microsoft/swin-tiny-patch4-window7-224 and are newly initialized: ['hidden_states_norms.stage1.bias', 'hidden_states_norms.stage1.weight', 'hidden_states_norms.stage2.bias', 'hidden_states_norms.stage2.weight', 'hidden_states_norms.stage3.bias', 'hidden_states_norms.stage3.weight', 'hidden_states_norms.stage4.bias', 'hidden_states_norms.stage4.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+pixel_encoder_params:  27520698
+pixel_decoder_params:  5421504
+transformer_params:  14412544
+Mask2Former model initialized
+initialize network with normal
+initialize network with normal
+initialize network with normal
+initialize network with normal
+model [USSEGModel] was created
+---------- Networks initialized -------------
+[Network G_A] Total number of parameters : 47.355 M
+[Network G_B] Total number of parameters : 12.546 M
+[Network D_A] Total number of parameters : 2.894 M
+[Network D_B] Total number of parameters : 2.763 M
+-----------------------------------------------
+create image directory ./checkpoints/800size_10ins/images...
+Start at:  1770890725.6360106
+[rank1]:[W212 10:05:26.750056663 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank0]:[W212 10:05:27.791103456 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank2]:[W212 10:05:27.899387562 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+[rank3]:[W212 10:05:27.153734923 reducer.cpp:1400] Warning: find_unused_parameters=True was specified in DDP constructor, but did not find any unused parameters in the forward pass. This flag results in an extra traversal of the autograd graph every iteration,  which can adversely affect performance. If your model indeed never has any unused parameters in the forward pass, consider turning this flag off. Note that this warning may be a false positive if your model has flow control causing later iterations to have unused parameters. (function operator())
+(epoch: 1, iters: 200, time: 0.424, data: 0.374) cycle_A: 55.573 D_A: 0.232 G_A: 6.747 D_B: 0.662 G_B: 13.654 cycle_B: 0.002 G: 75.977 D: 0.893 
+(epoch: 1, iters: 400, time: 0.439, data: 0.000) cycle_A: 46.478 D_A: 0.263 G_A: 6.176 D_B: 0.467 G_B: 11.954 cycle_B: 0.000 G: 64.608 D: 0.731 
+(epoch: 1, iters: 600, time: 0.426, data: 0.000) cycle_A: 46.488 D_A: 0.180 G_A: 7.505 D_B: 0.347 G_B: 12.300 cycle_B: 0.000 G: 66.293 D: 0.527 
+(epoch: 1, iters: 800, time: 0.452, data: 0.000) cycle_A: 47.773 D_A: 0.168 G_A: 6.138 D_B: 0.295 G_B: 13.397 cycle_B: 0.000 G: 67.308 D: 0.463 
+(epoch: 1, iters: 1000, time: 0.447, data: 0.000) cycle_A: 45.649 D_A: 0.206 G_A: 4.038 D_B: 0.357 G_B: 8.660 cycle_B: 0.001 G: 58.347 D: 0.562 
+learning rate 0.0000500 -> 0.0000500
+End of epoch 1 / 600 	 Time Taken: 115 sec
+(epoch: 2, iters: 200, time: 0.441, data: 0.408) cycle_A: 46.882 D_A: 0.200 G_A: 5.050 D_B: 0.311 G_B: 8.540 cycle_B: 0.001 G: 60.473 D: 0.511 
+(epoch: 2, iters: 400, time: 0.424, data: 0.000) cycle_A: 46.483 D_A: 0.204 G_A: 7.759 D_B: 0.255 G_B: 10.571 cycle_B: 0.000 G: 64.814 D: 0.460 
+(epoch: 2, iters: 600, time: 0.427, data: 0.000) cycle_A: 43.405 D_A: 0.186 G_A: 8.224 D_B: 0.255 G_B: 10.089 cycle_B: 0.001 G: 61.719 D: 0.441 
+(epoch: 2, iters: 800, time: 0.439, data: 0.000) cycle_A: 44.919 D_A: 0.189 G_A: 5.814 D_B: 0.246 G_B: 9.278 cycle_B: 0.000 G: 60.011 D: 0.435 
+(epoch: 2, iters: 1000, time: 0.449, data: 0.000) cycle_A: 44.066 D_A: 0.234 G_A: 12.273 D_B: 0.243 G_B: 8.861 cycle_B: 0.000 G: 65.200 D: 0.477 
+learning rate 0.0000500 -> 0.0000500
+End of epoch 2 / 600 	 Time Taken: 111 sec

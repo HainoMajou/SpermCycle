@@ -71,7 +71,7 @@ class GANLoss(nn.Module):
                 loss = prediction.mean()
         return loss
     
-class NLayerDiscriminator(nn.Module):
+class PatchDiscriminator(nn.Module):
     """Defines a PatchGAN discriminator"""
 
     def __init__(self, input_nc, ndf=64, n_layers=3, norm_layer=nn.BatchNorm2d):
@@ -83,7 +83,7 @@ class NLayerDiscriminator(nn.Module):
             n_layers (int)  -- the number of conv layers in the discriminator
             norm_layer      -- normalization layer
         """
-        super(NLayerDiscriminator, self).__init__()
+        super(PatchDiscriminator, self).__init__()
         if type(norm_layer) == functools.partial:  # no need to use bias as BatchNorm2d has affine parameters
             use_bias = norm_layer.func == nn.InstanceNorm2d
         else:
@@ -117,6 +117,77 @@ class NLayerDiscriminator(nn.Module):
     def forward(self, input):
         """Standard forward."""
         return self.model(input)
+
+class PatchDiscriminatorForMask(nn.Module):
+    def __init__(self, input_nc, ndf=64, n_layers=3, norm_layer=nn.BatchNorm2d):
+        super(PatchDiscriminatorForMask, self).__init__()
+        
+        # 判断是否使用偏置
+        if type(norm_layer) == functools.partial:
+            use_bias = norm_layer.func == nn.InstanceNorm2d
+        else:
+            use_bias = norm_layer == nn.InstanceNorm2d
+
+        kw = 4
+        padw = 1
+        
+        # --- 基础 PatchGAN 骨干网络 ---
+        # 第一层不使用 Norm
+        self.conv1 = nn.Sequential(
+            self.sn_conv2d(input_nc, ndf, kernel_size=kw, stride=2, padding=padw),
+            nn.LeakyReLU(0.2, True)
+        )
+
+        nf_mult = 1
+        nf_mult_prev = 1
+        intermediate_layers = []
+        for n in range(1, n_layers):
+            nf_mult_prev = nf_mult
+            nf_mult = min(2 ** n, 8)
+            intermediate_layers += [
+                self.sn_conv2d(ndf * nf_mult_prev, ndf * nf_mult, kernel_size=kw, stride=2, padding=padw, bias=use_bias),
+                norm_layer(ndf * nf_mult),
+                nn.LeakyReLU(0.2, True)
+            ]
+        self.intermediate = nn.Sequential(*intermediate_layers)
+
+        nf_mult_prev = nf_mult
+        nf_mult = min(2 ** n_layers, 8)
+        self.conv_final_base = nn.Sequential(
+            self.sn_conv2d(ndf * nf_mult_prev, ndf * nf_mult, kernel_size=kw, stride=1, padding=padw, bias=use_bias),
+            norm_layer(ndf * nf_mult),
+            nn.LeakyReLU(0.2, True)
+        )
+
+        # --- 形状感知 (Shape-aware) 分支 ---
+        # 针对掩码的连续性和全局结构，我们使用全局池化提取宏观特征
+        self.shape_branch = nn.Sequential(
+            nn.AdaptiveAvgPool2d(1), # 提取全局均值（类似面积比例）
+            self.sn_conv2d(ndf * nf_mult, ndf * 2, kernel_size=1, stride=1, padding=0),
+            nn.LeakyReLU(0.2, True),
+            self.sn_conv2d(ndf * 2, ndf * nf_mult, kernel_size=1, stride=1, padding=0),
+            nn.Sigmoid() # 作为一个特征选择器或权重
+        )
+
+        # 最终 Patch 输出层
+        self.patch_out = self.sn_conv2d(ndf * nf_mult, 1, kernel_size=kw, stride=1, padding=padw)
+
+    def sn_conv2d(self, *args, **kwargs):
+        return nn.utils.spectral_norm(nn.Conv2d(*args, **kwargs))
+
+    def forward(self, input):
+        # 1. 骨干特征提取
+        x = self.conv1(input)
+        x = self.intermediate(x)
+        features = self.conv_final_base(x) # [B, C, H, W]
+        
+        # 2. 形状感知处理
+        # 提取全局形状先验，生成权重向量，重新作用于空间特征
+        shape_weight = self.shape_branch(features) 
+        enhanced_features = features * shape_weight 
+        
+        # 3. 输出 Patch Map
+        return self.patch_out(enhanced_features)
 
 
 class PixelDiscriminator(nn.Module):
@@ -186,9 +257,11 @@ def define_D(pretrained, input_nc, ndf, netD, n_layers_D=3, norm='batch', init_t
     norm_layer = get_norm_layer(norm_type=norm)
 
     if netD == 'basic':  # default PatchGAN classifier
-        net = NLayerDiscriminator(input_nc, ndf, n_layers=3, norm_layer=norm_layer)
+        net = PatchDiscriminator(input_nc, ndf, n_layers=3, norm_layer=norm_layer)
+    elif netD == 'mask':
+        net = PatchDiscriminatorForMask(input_nc, ndf, n_layers=3, norm_layer=norm_layer)
     elif netD == 'n_layers':  # more options
-        net = NLayerDiscriminator(input_nc, ndf, n_layers_D, norm_layer=norm_layer)
+        net = PatchDiscriminator(input_nc, ndf, n_layers_D, norm_layer=norm_layer)
     elif netD == 'pixel':     # classify if each pixel is real or fake
         net = PixelDiscriminator(input_nc, ndf, norm_layer=norm_layer)
     else:

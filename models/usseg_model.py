@@ -110,13 +110,13 @@ class USSEGModel(BaseModel):
             # D_A: 判别实例掩码 (输入通道数为 1，因为每个掩码是单通道)
             pre_D_A = f'{self.preseg}_net_D_A.pth' if self.preseg else None
             self.netD_A = discriminator.define_D(
-                pre_D_A, 1, opt.ndf, opt.netD, opt.n_layers_D, opt.norm,
+                pre_D_A, 1, opt.ndf, 'mask', opt.n_layers_D, opt.norm,
                 opt.init_type, opt.init_gain, self.gpu_ids, distributed=distributed
             )
             # D_B: 判别图像
             pre_D_B = f'{self.pregen}_net_D_B.pth' if self.pregen else None
             self.netD_B = discriminator.define_D(
-                pre_D_B, opt.input_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.norm,
+                pre_D_B, opt.input_nc, opt.ndf, 'basic', opt.n_layers_D, opt.norm,
                 opt.init_type, opt.init_gain, self.gpu_ids, distributed=distributed
             )
 
@@ -269,7 +269,7 @@ class USSEGModel(BaseModel):
 
     def optimize_parameters(self):
         # 1. 清零所有梯度
-        self.set_requires_grad([self.netD_B], False)
+        self.set_requires_grad([self.netD_A, self.netD_B], False)
         self.optimizer_G_A.zero_grad()
         self.optimizer_G_B.zero_grad()
         use_ddp = (self.opt.distributed and hasattr(self.netG_A, 'no_sync') and hasattr(self.netG_B, 'no_sync'))
@@ -354,8 +354,8 @@ class USSEGModel(BaseModel):
                 B, N, H, W = self.real_A.shape
                 real_A_flat = self.real_A.view(B * N, 1, H, W)
                 tensor_sum = real_A_flat.sum(dim=[1, 2, 3])
-                real_A_filtered = real_A_flat[tensor_sum > 10] # 过滤掉全零掩码
-                pred_real_A = self.netD_A(real_A_filtered * 2 - 1) # 判别器输入范围需要[-1, 1]
+                # real_A_filtered = real_A_flat[tensor_sum > 10] # 过滤掉全零掩码
+                pred_real_A = self.netD_A(real_A_flat * 2 - 1) # 判别器输入范围需要[-1, 1]
                 loss_D_A_real = self.criterionGAN(pred_real_A, True)
                 
                 B, N, H, W = fake_A.shape

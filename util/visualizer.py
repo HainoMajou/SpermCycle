@@ -77,10 +77,7 @@ class Visualizer():
             # save images to the disk
             for label, image_data in visuals.items():
                 # 通过张量维度和形状判断是否为实例掩码 (B, N, H, W)
-                # 不依赖变量名，只看数据的实际形状
-                is_instance_mask = is_instance_mask_tensor(image_data)
-
-                if is_instance_mask:
+                if is_instance_mask_tensor(image_data):
                     # 为实例掩码创建子文件夹（在epoch文件夹下）
                     mask_folder = os.path.join(epoch_dir, label)
                     util.mkdirs([mask_folder])
@@ -92,8 +89,8 @@ class Visualizer():
                         mask = instances[i].detach().cpu().float().numpy()
 
                         # 跳过空掩码（全零或接近全零）
-                        if mask.max() < 0.01 and mask.min() > -0.01:
-                            continue
+                        # if mask.max() < 0.01 and mask.min() > -0.01:
+                        #     continue
 
                         # 归一化到 [0, 1]
                         if mask.min() < 0:

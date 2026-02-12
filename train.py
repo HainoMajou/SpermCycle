@@ -175,11 +175,6 @@ if __name__ == '__main__':
                 model.set_input(data)         # unpack data from dataset and apply preprocessing
                 model.optimize_parameters()   # calculate loss functions, get gradients, update network weights
 
-                # Visualize on main process only
-                if is_main_process():
-                    if total_iters % opt.display_freq == 0:   # save images
-                        visualizer.display_current_results(model.get_current_visuals(), epoch, save_result=True)
-
                 # Print losses - all processes participate in reduction, only rank 0 prints
                 if total_iters % opt.print_freq == 0:
                     losses = model.get_current_losses()
@@ -191,19 +186,13 @@ if __name__ == '__main__':
                         t_comp = (time.time() - iter_start_time) / opt.batch_size
                         visualizer.print_current_losses(epoch, epoch_iter, losses, t_comp, t_data)
 
-                # Save model - must synchronize all processes first
-                if total_iters % opt.save_latest_freq == 0:
-                    if opt.distributed:
-                        dist.barrier()  # Wait for all processes before saving
-                    if is_main_process():
-                        print('saving the latest model (epoch %d, total_iters %d)' % (epoch, total_iters))
-                        save_suffix = 'iter_%d' % total_iters if opt.save_by_iter else 'latest'
-                        model.save_networks(save_suffix)
-                    if opt.distributed:
-                        dist.barrier()  # Wait for save to complete before continuing
-
                 iter_data_time = time.time()
-            
+                
+            # Visualize on main process only
+            if is_main_process():
+                if total_iters % opt.display_freq == 0:   # save images
+                    visualizer.display_current_results(model.get_current_visuals(), epoch, save_result=True)
+
             # Save model at epoch end - synchronize all processes
             if epoch % opt.save_epoch_freq == 0:
                 if opt.distributed:

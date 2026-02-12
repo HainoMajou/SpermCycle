@@ -34,7 +34,7 @@ class Mask2FormerWrapper(nn.Module):
         - 'labels': Tensor (N,), 类别标签（全部为0，表示前景）
     """
     
-    def __init__(self, preseg=None, num_queries=10):
+    def __init__(self, pretrained=None, num_queries=10):
         """
         Parameters:
             pretrained (bool) -- 是否使用预训练权重
@@ -45,19 +45,19 @@ class Mask2FormerWrapper(nn.Module):
         config = Mask2FormerConfig.from_pretrained("facebook/mask2former-swin-tiny-coco-instance")
         config.num_labels = 1
         config.num_queries = self.num_queries
-        if preseg=='hf':
+        if pretrained=='hf':
             self.model = Mask2FormerForUniversalSegmentation.from_pretrained(
                 "facebook/mask2former-swin-tiny-coco-instance",
                 config = config,
                 ignore_mismatched_sizes = True
             )
             print("Mask2Former model loaded from facebook/mask2former-swin-tiny-coco-instance")
-        elif preseg is not None:
+        elif pretrained is not None:
             self.model = Mask2FormerForUniversalSegmentation(config)
-            state_dict = torch.load(preseg)
+            state_dict = torch.load(pretrained)
             state_dict = {k.replace("model.", "", 1): v for k, v in state_dict.items()}
             self.model.load_state_dict(state_dict)
-            print("Mask2Former model loaded from %s" % preseg)
+            print("Mask2Former model loaded from %s" % pretrained)
         else:
             config.use_pretrained_backbone = True
             config.backbone = "microsoft/swin-tiny-patch4-window7-224"

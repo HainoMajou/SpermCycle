@@ -92,27 +92,31 @@ class USSEGModel(BaseModel):
         self.pregen = getattr(opt, 'pregen', None)
         
         # G_A: Mask2Former (图像 → 实例掩码)
+        pre_G_A = f'{self.preseg}_net_G_A.pth' if self.preseg else None
         self.netG_A = generator.define_Mask2Former(
-            self.preseg, self.max_instances,  
+            pre_G_A, self.max_instances,  
             opt.init_type, opt.init_gain, gpu_ids=self.gpu_ids, distributed=distributed
         )
         
         # G_B: 单个实例掩码 → 图像
+        pre_G_B = f'{self.pregen}_net_G_B.pth' if self.pregen else None
         self.netG_B = generator.define_G(
-            self.pregen, opt.output_nc, opt.input_nc, opt.ngf, opt.netG, opt.norm,
+            pre_G_B, opt.output_nc, opt.input_nc, opt.ngf, opt.netG, opt.norm,
             not opt.no_dropout, opt.init_type, opt.init_gain, self.gpu_ids,
             thres=True, distributed=distributed
         )
         
         if self.isTrain:
             # D_A: 判别实例掩码 (输入通道数为 1，因为每个掩码是单通道)
+            pre_D_A = f'{self.preseg}_net_D_A.pth' if self.preseg else None
             self.netD_A = discriminator.define_D(
-                1, opt.ndf, opt.netD, opt.n_layers_D, opt.norm,
+                pre_D_A, 1, opt.ndf, opt.netD, opt.n_layers_D, opt.norm,
                 opt.init_type, opt.init_gain, self.gpu_ids, distributed=distributed
             )
             # D_B: 判别图像
+            pre_D_B = f'{self.pregen}_net_D_B.pth' if self.pregen else None
             self.netD_B = discriminator.define_D(
-                opt.input_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.norm,
+                pre_D_B, opt.input_nc, opt.ndf, opt.netD, opt.n_layers_D, opt.norm,
                 opt.init_type, opt.init_gain, self.gpu_ids, distributed=distributed
             )
 
@@ -164,9 +168,9 @@ class USSEGModel(BaseModel):
     def set_input(self, input):
         """设置输入张量"""
         AtoB = self.opt.direction == 'AtoB'
-        self.real_A = input['A' if AtoB else 'B'].to(self.device)
-        self.real_B = input['B' if AtoB else 'A'].to(self.device)
-        self.real_C = input['C'].to(self.device)
+        self.real_A = input['A' if AtoB else 'B'].to(self.device) # {0, 1}
+        self.real_B = input['B' if AtoB else 'A'].to(self.device) # [-1, 1]
+        self.real_C = input['C'].to(self.device) # [-1, 1]
         self.image_paths = input['A_paths' if AtoB else 'B_paths']
         self.shape_A = self.real_A.shape
 
@@ -179,7 +183,7 @@ class USSEGModel(BaseModel):
             background = background.mean(dim=1, keepdim=True)
         
         mask_merged, _ = torch.max(instances, dim=1, keepdim=True)
-        masks_input = mask_merged * 2 - 1
+        masks_input = mask_merged * 2 - 1 # [-1, 1]
         with torch.set_grad_enabled(self.isTrain):
             inst_image = self.netG_B(masks_input)
             
@@ -238,14 +242,13 @@ class USSEGModel(BaseModel):
         else:
             self.fake_A_logits = masks_logits
         
-        # 对 logits 应用 sigmoid，转换到 [0, 1] 概率范围
-        self.fake_A = torch.sigmoid(self.fake_A_logits)
-        self.rec_B = self.instances_to_image(self.fake_A, self.real_B)
+        self.fake_A = torch.sigmoid(self.fake_A_logits) # 对 logits 应用 sigmoid，转换到 [0, 1] 概率范围
+        self.rec_B = self.instances_to_image(self.fake_A, self.real_B) # [-1, 1]
 
     def forward_path_ABA(self):
         """路径2: real_A → G_B → fake_B → G_A → rec_A"""
         B, N, H, W = self.real_A.shape
-        self.fake_B = self.instances_to_image(self.real_A, self.real_C)
+        self.fake_B = self.instances_to_image(self.real_A, self.real_C) # [-1, 1]
 
         mask_list, class_list = tensor2list(self.real_A)
         rec_A_outputs = self.netG_A(self.fake_B, mask_list, class_list)
@@ -262,8 +265,7 @@ class USSEGModel(BaseModel):
         else:
             self.rec_A_logits = masks_logits
         
-        # 对 logits 应用 sigmoid，转换到 [0, 1] 概率范围
-        self.rec_A = torch.sigmoid(self.rec_A_logits)
+        self.rec_A = torch.sigmoid(self.rec_A_logits) # [0, 1]
 
     def optimize_parameters(self):
         # 1. 清零所有梯度
@@ -280,7 +282,7 @@ class USSEGModel(BaseModel):
 
                 B, N, H, W = self.fake_A.shape
                 fake_A_flat = self.fake_A.view(B * N, 1, H, W)
-                pred_fake_A = self.netD_A(fake_A_flat)
+                pred_fake_A = self.netD_A(fake_A_flat * 2 - 1) # 判别器输入范围需要[-1, 1]
                 self.loss_G_A = self.criterionGAN(pred_fake_A, True) * self.opt.lambda_GA
 
                 self.loss_cycle_B = self.criterionCycle(self.rec_B, self.real_B) * self.opt.lambda_B
@@ -352,13 +354,13 @@ class USSEGModel(BaseModel):
                 B, N, H, W = self.real_A.shape
                 real_A_flat = self.real_A.view(B * N, 1, H, W)
                 tensor_sum = real_A_flat.sum(dim=[1, 2, 3])
-                real_A_filtered = real_A_flat[tensor_sum > 10]
-                pred_real_A = self.netD_A(real_A_filtered)
+                real_A_filtered = real_A_flat[tensor_sum > 10] # 过滤掉全零掩码
+                pred_real_A = self.netD_A(real_A_filtered * 2 - 1) # 判别器输入范围需要[-1, 1]
                 loss_D_A_real = self.criterionGAN(pred_real_A, True)
                 
                 B, N, H, W = fake_A.shape
                 fake_A_flat = fake_A.view(B * N, 1, H, W)
-                pred_fake_A = self.netD_A(fake_A_flat)
+                pred_fake_A = self.netD_A(fake_A_flat * 2 - 1) # 判别器输入范围需要[-1, 1]
                 loss_D_A_fake = self.criterionGAN(pred_fake_A, False)
                 self.loss_D_A = (loss_D_A_real + loss_D_A_fake) * 0.5 * self.opt.lambda_DA
 

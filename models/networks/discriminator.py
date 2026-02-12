@@ -151,7 +151,7 @@ class PixelDiscriminator(nn.Module):
         return self.net(input)
     
 
-def define_D(input_nc, ndf, netD, n_layers_D=3, norm='batch', init_type='normal', init_gain=0.02, gpu_ids=[], distributed=False):
+def define_D(pretrained, input_nc, ndf, netD, n_layers_D=3, norm='batch', init_type='normal', init_gain=0.02, gpu_ids=[], distributed=False):
     """Create a discriminator
 
     Parameters:
@@ -193,4 +193,19 @@ def define_D(input_nc, ndf, netD, n_layers_D=3, norm='batch', init_type='normal'
         net = PixelDiscriminator(input_nc, ndf, norm_layer=norm_layer)
     else:
         raise NotImplementedError('Discriminator model name [%s] is not recognized' % netD)
-    return init_net(net, init_type, init_gain, gpu_ids, distributed)
+
+    if pretrained:
+        checkpoint = torch.load(pretrained, map_location='cpu')
+        if isinstance(checkpoint, dict):
+            if 'state_dict' in checkpoint:
+                state_dict = checkpoint['state_dict']
+            elif 'model' in checkpoint:
+                state_dict = checkpoint['model']
+            else:
+                state_dict = checkpoint
+        net.load_state_dict(state_dict, strict=True)
+        net = init_net(net, None, None, gpu_ids, distributed)
+        print("Discriminator model loaded from %s" % pretrained)
+    else:
+        net = init_net(net, init_type, init_gain, gpu_ids, distributed)
+    return net

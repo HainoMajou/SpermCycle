@@ -5,7 +5,7 @@ from .utils import get_norm_layer, init_net
 from .mask2former import Mask2FormerWrapper
 import torch
 
-def define_G(pregen, input_nc, output_nc, ngf, netG, norm='batch', use_dropout=False, init_type='normal', init_gain=0.02, gpu_ids=[], thres=False, distributed=False):
+def define_G(pretrained, input_nc, output_nc, ngf, netG, norm='batch', use_dropout=False, init_type='normal', init_gain=0.02, gpu_ids=[], thres=False, distributed=False):
     """Create a generator
 
     Parameters:
@@ -51,8 +51,8 @@ def define_G(pregen, input_nc, output_nc, ngf, netG, norm='batch', use_dropout=F
     else:
         raise NotImplementedError('Generator model name [%s] is not recognized' % netG)
 
-    if pregen is not None:
-        checkpoint = torch.load(pregen, map_location='cpu')
+    if pretrained is not None:
+        checkpoint = torch.load(pretrained, map_location='cpu')
         if isinstance(checkpoint, dict):
             if 'state_dict' in checkpoint:
                 state_dict = checkpoint['state_dict']
@@ -60,14 +60,15 @@ def define_G(pregen, input_nc, output_nc, ngf, netG, norm='batch', use_dropout=F
                 state_dict = checkpoint['model']
             else:
                 state_dict = checkpoint
+        # state_dict = {f"module.{k}": v for k, v in state_dict.items()}
         net.load_state_dict(state_dict, strict=True)
-        print("Generator model loaded from %s" % pregen)
+        net = init_net(net, None, None, gpu_ids, distributed)
+        print("Generator model loaded from %s" % pretrained)
     else:
         net = init_net(net, init_type, init_gain, gpu_ids, distributed)
-
     return net
 
-def define_Mask2Former(preseg=None, num_queries=10,
+def define_Mask2Former(pretrained=None, num_queries=10,
                        init_type='normal', init_gain=0.02, gpu_ids=[], distributed=False):
     """ 
     配置为单类别前景分割：所有检测到的实例都是前景对象。
@@ -79,7 +80,7 @@ def define_Mask2Former(preseg=None, num_queries=10,
     Returns:
         Mask2FormerWrapper instance (单类别配置)
     """
-    net = Mask2FormerWrapper(preseg=preseg, num_queries=num_queries)
+    net = Mask2FormerWrapper(pretrained=pretrained, num_queries=num_queries)
     net = init_net(net, init_type, init_gain, gpu_ids, distributed)
     
     return net

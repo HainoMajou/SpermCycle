@@ -120,7 +120,8 @@ def init_net(net, init_type='normal', init_gain=0.02, gpu_ids=[], distributed=Fa
         elif len(gpu_ids) > 1:
             # Fallback to DataParallel for multi-GPU without DDP
             net = torch.nn.DataParallel(net, gpu_ids)
-    init_weights(net, init_type, init_gain=init_gain)
+    if init_type is not None:
+        init_weights(net, init_type=init_type, init_gain=init_gain)
     return net
 
 
